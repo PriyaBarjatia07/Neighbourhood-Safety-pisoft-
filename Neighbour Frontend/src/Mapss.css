@@ -1,0 +1,145 @@
+@import "tailwindcss";
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+ .background::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(8px);
+  z-index: -1;
+} 
+/* Navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2c3e50;
+  padding: 15px 30px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbar img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.logo-container img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  clip-path: circle(50% at 50% 50%);
+  
+    
+    
+  }
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+  /*gap: 10px;*/
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  margin-left: 5px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  
+}
+
+.nav-links li {
+  display: inline;
+  
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size:16px;
+  padding: 10px 15px;
+  transition: 0.3s;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  background-color: rgb(122, 122, 156);
+}
+
+ /* Map Container */
+  .map-container {
+    max-width: 800px;
+    margin: 120px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .map-container h2 {
+    color: #2c3e50;
+  }
+  
+  #map {
+    width: 100%;
+    height: 400px;
+    background-color: #dfe6e9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #7f8c8d;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .nav-links {
+      flex-direction: column;
+      width: 100%;
+      padding: 10px 0;
+    }
+    .map-container {
+      width: 90%;
+    }
+  }
+  

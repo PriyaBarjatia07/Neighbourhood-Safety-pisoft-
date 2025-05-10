@@ -1,0 +1,160 @@
+@import "tailwindcss";
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+  scroll-behavior: smooth;
+}
+
+ 
+
+
+
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  /* background-color: rgba(255, 255, 255, 0.8); Optional: helps visibility */
+  padding: 100px;
+  border-radius: 12px;
+}
+
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.95); /* Add this */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Optional */
+  color: #2c3e50; /* Ensure text is visible */
+}
+.dashboard-header h1,
+.dashboard-header p {
+  color: #2c3e50; /* Dark text to contrast light background */
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.charts-section {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.chart-card {
+  flex: 1;
+  min-width: 300px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.extra-sections {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.notifications,
+.tasks {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.notifications ul,
+.tasks ul {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.notifications ul li,
+.tasks ul li {
+  margin-bottom: 10px;
+}
+
+.latest-crimes .crime-update {
+  background: #fff;
+  margin: 10px 0;
+  padding: 15px;
+  border-left: 5px solid crimson;
+  border-radius: 8px;
+}
+.latest-crimes h2{
+  color: white;
+  font-weight: bold;
+}
+
+  .emergency-contacts {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .emergency-contacts h2 {
+    margin-bottom: 15px;
+    color: #e74c3c;
+  }
+  
+  .emergency-contacts ul {
+    list-style-type: none;
+    padding-left: 0;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .emergency-contacts li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: black;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  .emergency-tips h1{
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bolder;
+  }
+  
+ .emergency{
+  background-color: #2c3e50;
+  border-radius: 8px;
+ } 
+  
