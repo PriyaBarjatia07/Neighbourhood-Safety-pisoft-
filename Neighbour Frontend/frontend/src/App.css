@@ -1,0 +1,272 @@
+ @import "tailwindcss";
+ 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    scroll-behavior: smooth;
+  }
+  .background::before{
+    content: "";
+     position:fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('./assets/images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+     filter: blur(8px); 
+    z-index: -1;
+  }
+  
+
+
+
+
+
+
+
+
+
+/* .login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* margin-top: 100px; 
+} */
+
+
+.login h3{
+  
+  text-align: center;
+   align-items: center; 
+  font-size: 30px;
+  font-weight: bolder;
+  color: #2c3e50;
+  font-family: sans-serif;
+  margin-bottom: 0px;
+}
+
+.ant-form {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+}
+
+.ant-input-affix-wrapper {
+  border-radius: 5px;
+}
+
+
+/* Login page container */
+.login-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 100vh; */
+  
+}
+
+/* Login container */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px; /* Space between form and image */
+}
+
+/* Ant Design form inside login box */
+.login h3 {
+  text-align: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: bolder;
+  color: #2c3e50;
+  font-family: sans-serif;
+  margin-bottom: 0px;
+}
+
+.ant-form {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+}
+
+.ant-input-affix-wrapper {
+  border-radius: 5px;
+}
+
+/* Buttons */
+.ant-btn-primary {
+  background-color: #003366;
+  border-color: #003366;
+}
+
+.ant-btn-primary:hover {
+  background-color: #002855;
+  border-color: #002855;
+}
+
+
+
+
+
+
+
+
+/* Wrapper for both form and image to appear as a single container */
+.login-wrapper {
+  display: flex;
+  /* border: 1px solid #ddd; Single border around both */
+  border-radius: 8px;
+  /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.08); */
+  overflow: hidden; /* Ensures the rounded corners are applied properly */
+  margin-top: 200px;
+}
+
+
+
+/* Ant Design form inside login box */
+.login h3 {
+  text-align: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: bolder;
+  color: #2c3e50;
+  font-family: sans-serif;
+  margin-bottom: 0px;
+}
+
+.ant-form {
+  background-color: #fff;
+  border: none; /* Remove individual border since the wrapper has one */
+}
+
+/* Ensure the form and image have the same height */
+.login-container,
+.login-illustration {
+  /* margin-top: 200px; */
+  height: 354px; /* Fixed height for both */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+/* Login illustration */
+/* .login-illustration {
+  background-color: #f5f5f5;  Optional: Add a background color to the image side 
+  border-left: 1px solid #ddd;  Separator between form and image 
+} */
+
+.login-illustration img {
+  /* width: 360px; Match the form's max-width */
+  height: 100%; /* Ensure the image fills the container height */
+  object-fit: cover; /* Ensure the image scales properly */
+  border-radius: 0 8px 8px 0;  
+  height: 354px;/* Rounded corners on the right side only */
+}
+
+/* Buttons */
+.ant-btn-primary {
+  background-color: #003366;
+  border-color: #003366;
+}
+
+.ant-btn-primary:hover {
+  background-color: #002855;
+  border-color: #002855;
+}
+
+.ant-input-affix-wrapper {
+  border-radius: 5px;
+}
+/* Fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Base styles */
+.login-wrapper {
+  display: flex;
+  flex-direction: row;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 200px;
+  margin-bottom: 100px;
+  animation: fadeInUp 1s ease-in-out;
+  transition: all 0.3s ease;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.login {
+  animation: fadeInUp 1s ease-in-out;
+}
+
+/* Illustration */
+.login-illustration img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .login-wrapper {
+    flex-direction: column;
+    margin: 40px 20px;
+  }
+
+  .login-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .login-illustration img {
+    width: 100%;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .login h3 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 10px;
+  }
+
+  .login-wrapper {
+    margin-top: 80px;
+  }
+
+  .login h3 {
+    font-size: 20px;
+  }
+
+  .ant-form {
+    padding: 10px;
+  }
+
+  .ant-btn-primary {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}

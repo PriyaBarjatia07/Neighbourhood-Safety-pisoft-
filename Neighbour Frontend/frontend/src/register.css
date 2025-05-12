@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+.full-page-loader{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height: 100vh;
+  background: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+ justify-content: center;
+  z-index: 9999;
+  /* margin-top: 500px; */
+}
+.register-container{
+  margin-top: 100px;
+}
+/* REGISTER PAGE STYLES */
+
+/* Loader styling */
+.full-page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Container with animation */
+.register-container {
+  margin-top: 100px;
+  padding: 20px;
+  animation: slideFadeIn 0.7s ease-in-out;
+}
+
+/* Animations */
+@keyframes slideFadeIn {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive form container */
+.ant-form {
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .register-container {
+    margin: 60px 10px 20px;
+  }
+
+  .ant-form {
+    padding: 10px !important;
+  }
+
+  .ant-form-item-label > label {
+    font-size: 14px;
+  }
+
+  .ant-btn {
+    width: 100%;
+  }
+
+  .google-button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+.google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.google-button:hover {
+  background-color: #f5f5f5;
+}
+
+.google-button img {
+  width: 20px;
+  height: 20px;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+  font-size: 14px;
+  color: #888;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ddd;
+  margin: 0 8px;
+}
