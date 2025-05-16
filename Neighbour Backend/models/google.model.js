@@ -19,17 +19,17 @@ const GoogleUserSchema = new Schema({
   password: {
     type: String,
   },
-  allowedDoctors: [
-    {
-      _id: {
-        type: Types.ObjectId,
-        ref: "User",
-      },
-      name: String,
-      email: String,
-      phone: Number,
-    },
-  ],
+  // allowedDoctors: [
+  //   {
+  //     _id: {
+  //       type: Types.ObjectId,
+  //       ref: "User",
+  //     },
+  //     name: String,
+  //     email: String,
+  //     phone: Number,
+  //   },
+  // ],
 
   confirmPassword: {
     type: String,

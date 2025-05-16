@@ -11,7 +11,12 @@ const reportSchema = new Schema({
     type: String,
     content: String
   }],
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  // coordinates: {
+  //   type: [Number],  // [longitude, latitude]
+  //   index: "2dsphere",  // Geospatial index
+  //   required: true,
+  // },
 });
 
 module.exports = model("Report", reportSchema,"reports");

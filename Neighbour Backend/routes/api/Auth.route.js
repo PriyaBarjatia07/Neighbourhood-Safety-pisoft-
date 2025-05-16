@@ -10,15 +10,22 @@ const addUser = require("../../controllers/auth/addUser.js");
 
 const getUsers = require("../../controllers/auth/users.js");
 const getIncidents = require("../../controllers/auth/incidents.js");
+const getLocation= require("../../controllers/auth/getLocations.js");
 const updateUser = require("../../controllers/auth/updateUser.js");
 const deleteUser = require("../../controllers/auth/deleteUser.js");
 const google = require("../../controllers/auth/google.js");
+const forgotPassword = require("../../controllers/auth/forgotPassword.js");
+const verifyPassword = require("../../controllers/auth/verifyPassword.js");
 // const getReports = require("../../controllers/auth/getReports.js");
+// const { forgotPassword } = require("../../controllers/auth/forgotPassword");
+// const { resetPassword } = require("../../controllers/auth/resetPassword");
 route.post("/register", register)
 route.post("/login", login)
 route.post("/report",report);
 // route.post("/admin", admin)
 // route.post("/upload",uploadFile);
+// route.post("/forgot-password", forgotPassword);
+// route.post("/reset-password/:token", resetPassword);
 
   route.post("/report", upload.array("media", 10), async (req, res) => {
     try {
@@ -46,9 +53,11 @@ route.post("/report",report);
     
 route.get("/getUsers",getUsers);
 route.get("/getIncidents",getIncidents);
-//  route.get("/getReports",getReports);
+route.get("/getLocation",getLocation);
 route.post("/addUser",addUser)
 route.post("/google",google)
+route.post("/forgotPassword",forgotPassword)
+route.post("/verifyPassword",verifyPassword)
 route.put("/updateUser/:id",updateUser);
 route.delete("/deleteUser/:id",deleteUser)
 
