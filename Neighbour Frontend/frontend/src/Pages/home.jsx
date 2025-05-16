@@ -21,10 +21,10 @@ const home = () => {
  
   return (
     <div className='background'>
-  
+   {/* <div className='main-content'> */}
     <Navbar/>
   
-  {/* <!-- Hero Section --> */}
+   <div className='main-content'>
    <div className="image">
   <header className="hero">
     <div className="hero-content">
@@ -32,15 +32,13 @@ const home = () => {
       <p>Track incidents, stay updated, and help create a safer neighborhood.</p>
       <div className="buttons">
         <NavLink to="/login" className="btn">Get Started</NavLink>
-        {/* <NavLink to="/map" className="btn secondary">View Map </NavLink> */}
-        {/* <a href="report.html" className="btn" <NavLink to="/register">Register now!</NavLink>>Report Incident</a>or<NavLink to="/register">Register now!</NavLink>
-        <a href="map.html" className="btn secondary">View Map</a> */}
+        
         
       </div>
     </div>
   </header>
 
-  {/* <!-- Info Section --> */}
+ 
   <section className="info">
     <h2>How It Works</h2>
     <div className="info-grid">
@@ -61,7 +59,7 @@ const home = () => {
       </div>
     </div>
   </section>
-   {/* <!-- Customizable Dashboard --> */}
+
   <section className="dashboard">
     <h2>Customize Your Safety Dashboard</h2>
     <p>Select the data you want to see on your dashboard.</p>
@@ -83,7 +81,7 @@ const home = () => {
   </section>
   
   </div>
-    {/* <!-- About Section --> */}
+  
     <section className="about">
       <div className="about-content">
         <h2>About Neighborhood Safety Dashboard</h2>
@@ -112,8 +110,8 @@ const home = () => {
       </div>
     </section>
   </div>
-  {/* footer section */}
   
+  </div>
     
         
       

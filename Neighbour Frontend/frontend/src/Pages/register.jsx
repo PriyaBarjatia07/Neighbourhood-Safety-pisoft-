@@ -72,13 +72,13 @@ const navigate =useNavigate();
       try {
           if (authResult.code) {
               const res = axios.post(`http://localhost:5001/api/auth/google?code=${authResult.code}`);
+              navigate("/dashboard");
               
               console.log("Response from backend:", res);
               const { email, name, image } = res.data.user;
               const token = res.data.token;
               const obj = { email, name, token, image };
               localStorage.setItem("user-info", JSON.stringify(obj));
-              navigate("dashboard");
           } else {
               throw new Error("Google authentication failed");
           }
@@ -107,7 +107,7 @@ const navigate =useNavigate();
       <>
       <div className='background'>
         <Navbar/>
-
+    <h1 className="heading">Create Your Account</h1>
       <div className="register-container">
       
         <Spin spinning={loading} tip="Registering....">
@@ -124,7 +124,7 @@ const navigate =useNavigate();
           }}
         >
           <div>
-            <h1 className="text-2xl font-semibold text-center mb-4">Create Your Account</h1>
+            {/* <h1 className="text-2xl font-semibold text-center mb-4">Create Your Account</h1> */}
 
             {/* <h1>Create Your an Account</h1> */}
           <Form.Item name="email" label="E-mail" rules={[{ type: "email", required: true, message: "Enter a valid email!" }]}>
@@ -186,7 +186,7 @@ const navigate =useNavigate();
             <p style={{ marginTop: "10px" }}>
               Already have an account? { " "}
               <Button type="link" onClick={handleNavigateToLogin}>
-                Login now!
+                Sign In
               </Button>
             </p>
           </Form.Item>

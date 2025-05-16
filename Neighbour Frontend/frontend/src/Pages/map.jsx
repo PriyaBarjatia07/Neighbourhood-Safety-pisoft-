@@ -53,7 +53,7 @@ const MapPage = () => {
       <Navbar/>
      
 
-      {/* Map Section */}
+      
       <section className="map-container">
         <h2>Safety Map</h2>
         <GoogleMap
@@ -61,7 +61,7 @@ const MapPage = () => {
           center={center}
           zoom={13}
         >
-          {/* Markers */}
+          
           {reports.map((report, index) => {
             if (report.location) {
               const [latStr, lngStr] = report.location.split(",").map(val => val.trim());

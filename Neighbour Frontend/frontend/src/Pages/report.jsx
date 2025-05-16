@@ -194,9 +194,11 @@ const Report = () => {
               placeholder="Click 'Pick Location' and select on map"
               required
             />
-            <button type="button" onClick={handlePickLocation}>📍 Pick Location</button>
+            
+    
+            {/* <button className= "location" type="button" onClick={handlePickLocation}>📍 Pick Location</button> */}
           </div>
-
+<button className= "location" type="button" onClick={handlePickLocation}>📍 Pick Location</button>
           {showMap && (
             <div style={modalStyles}>
               <div ref={mapRef} style={mapStyles}></div>
@@ -219,7 +221,7 @@ const Report = () => {
           </div>
 
           <div className="form-group">
-            <button type="submit" disabled={loading}>
+            <button className="location" type="submit" disabled={loading}>
               {loading ? "Submitting..." : "Submit Report"}
             </button>
           </div>

@@ -1,32 +1,104 @@
-
-import React, { useEffect, useRef,useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../Dashboard.css';
-// import { Link } from 'react-router';
 import { Chart } from 'chart.js/auto';
-// import Logo from '../assets/images/logo.jpeg';
-import User from '../assets/images/user.png'
-import  Navbar from "../components/navbar";
-import  Footer from "../components/footer";
-import { useNavigate } from 'react-router';
-const Dashboard = () => {
-  const[enter,setEnter]=useState();
-  const navigate=useNavigate();
-  useEffect(() =>{
-  const enterValue= localStorage.getItem("Username");
-  setEnter(enterValue)
+import User from '../assets/images/user.png';
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
+import axios from 'axios';
+import { Table } from 'antd'; // Ant Design Table
+import 'antd/dist/reset.css'; // AntD styles (adjust if using custom theme)
 
-},[]);
+const Dashboard = () => {
+  const [enter, setEnter] = useState('');
+  const [locationData, setLocationData] = useState();
+  const [searchInput, setSearchInput] = useState('');
+  const [coords, setCoords] = useState(null);
 
   const pieRef = useRef(null);
-  const barRef = useRef(null);
+  const pieChartRef = useRef(null); // to destroy previous chart instance
 
+  // Get username from localStorage
   useEffect(() => {
-    const pieChart = new Chart(pieRef.current, {
+    const enterValue = localStorage.getItem("Username");
+    setEnter(enterValue);
+  }, []);
+
+  // Handle location search
+  const handleSearchLocation = async () => {
+    if (!searchInput.trim()) {
+      alert("Please enter a location");
+      return;
+    }
+
+    try {
+      const geoResponse = await axios.get(`https://api.opencagedata.com/geocode/v1/json`, {
+        params: {
+          q: searchInput,
+          key: '34e403a256c144d8a5b4a912f55b19ea', // Replace with your actual API key
+          limit: 1
+        }
+      });
+
+      const result = geoResponse.data.results[0];
+      if (result) {
+        const { lat, lng } = result.geometry;
+        setCoords({ latitude: lat, longitude: lng });
+      } else {
+        alert("Location not found");
+      }
+    } catch (error) {
+      console.error("Error fetching location from geocoding API:", error);
+    }
+  };
+
+  // Fetch location data when coords change
+  useEffect(() => {
+    const fetchLocationData = async (lat, lng) => {
+      try {
+        const response = await axios.get('http://localhost:5001/api/auth/getLocation', {
+          params: { lat, lng }
+        });
+
+        setLocationData(response.data);
+      } catch (error) {
+        console.error("Error fetching location data from backend:", error);
+      }
+    };
+
+    if (coords) {
+      fetchLocationData(coords.latitude, coords.longitude);
+    } else if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setCoords({ latitude, longitude });
+        },
+        (error) => {
+          console.error("Error getting location:", error.message);
+        }
+      );
+    }
+  }, [coords]);
+
+  // Create/Update Pie Chart when data is ready
+  useEffect(() => {
+    if (!pieRef.current || !locationData || !locationData.incidentCounts) return;
+
+    if (pieChartRef.current) {
+      pieChartRef.current.destroy(); // destroy previous chart
+    }
+
+    pieChartRef.current = new Chart(pieRef.current, {
       type: 'pie',
       data: {
-        labels: ['Robbery', 'Assault', 'Theft', 'Vandalism'],
+        labels: ['Theft', 'Suspicious Activity', 'Others', 'Vandalism'],
         datasets: [{
-          data: [25, 15, 40, 20],
+          data: [
+            locationData.incidentCounts.theft || 0,
+            locationData.incidentCounts.suspicious_activity || 0,
+            locationData.incidentCounts.others || 0,
+            locationData.incidentCounts.vandalism || 0
+          ],
           backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#4bc0c0']
         }]
       },
@@ -40,170 +112,115 @@ const Dashboard = () => {
       }
     });
 
-    const barChart = new Chart(barRef.current, {
-      type: 'bar',
-      data: {
-        labels: ['January', 'February', 'March', 'April'],
-        datasets: [{
-          label: 'Incidents',
-          data: [30, 45, 28, 60],
-          backgroundColor: '#36a2eb'
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-
     return () => {
-      pieChart.destroy();
-      barChart.destroy();
+      if (pieChartRef.current) {
+        pieChartRef.current.destroy();
+      }
     };
-  }, []);
+  }, [locationData]);
+
+  // Columns for Ant Design Table
+  const columns = [
+    {
+      title: 'Type',
+      dataIndex: 'incidentType',
+      key: 'incidentType',
+    },
+    {
+      title: 'Description',
+      dataIndex: 'description',
+      key: 'description',
+    },
+    {
+      title: 'Severity',
+      dataIndex: 'severity',
+      key: 'severity',
+    },
+    {
+      title: 'Location',
+      dataIndex: 'location',
+      key: 'location',
+    },
+    {
+      title: 'Anonymous',
+      dataIndex: 'anonymous',
+      key: 'anonymous',
+      render: (val) => (val ? 'Yes' : 'No')
+    },
+    {
+      title: 'Date',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      render: (val) => new Date(val).toLocaleString()
+    }
+  ];
 
   return (
     <div className="background">
-      <Navbar/>
-      
+      <Navbar />
 
-     
       <div className="dashboard-container">
         <main className="main-content">
-           <header className="dashboard-header">
+          <header className="dashboard-header">
             <div>
-              <h1>Welcome, {enter} </h1>
-              <p>Here’s what’s happening in your neighborhood today.</p>
+              <h1>Welcome, {enter}</h1>
+              <p className='para'>Here’s what’s happening in your neighborhood today.</p>
             </div>
             <div className="user-info">
               <img src={User} alt="User" />
               <span>{enter}</span>
             </div>
-          </header> 
+          </header>
 
-          
+          {/* Location Search Section */}
+          <section className="location-search">
+            <input
+              type="text"
+              placeholder="Enter a location....."
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              className="location-input"
+            />
+            {/* <button onClick={handleSearchLocation} className="location-button">
+              Search Location
+            </button> */}
+          </section>
+<button onClick={handleSearchLocation} className="location-button">
+              Search Location
+            </button>
+          {/* Stats Section */}
           <section className="dashboard-stats">
             <div className="stat-card">
-              <h3>Total Reports</h3>
-              <p>125</p>
-            </div>
-            <div className="stat-card">
-              <h3>Active Alerts</h3>
-              <p>5</p>
-            </div>
-            <div className="stat-card">
-              <h3>Resolved Cases</h3>
-              <p>89</p>
-            </div>
-            <div className="stat-card">
-              <h3>New Reports Today</h3>
-              <p>7</p>
+              <h3 className='head'>Nearby Reports</h3>
+              <p>{locationData?.nearbyReportsCount ?? 0}</p>
             </div>
           </section>
 
-          
+          {/* Charts Section */}
           <section className="charts-section">
             <div className="chart-card">
               <h2>Crime Type Distribution</h2>
               <canvas ref={pieRef}></canvas>
             </div>
-            <div className="chart-card">
-              <h2>Monthly Incident Report</h2>
-              <canvas ref={barRef}></canvas>
-            </div>
           </section>
 
-          
-          <section className="extra-sections">
-            <div className="notifications">
-              <h2>🔔 Notifications</h2>
-              <ul>
-                <li>🚨 Suspicious activity on Main Street <span>2 hours ago</span></li>
-                <li>🚓 Police patrolling near Oak Avenue <span>4 hours ago</span></li>
-              </ul>
-            </div>
-
-            <div className="tasks">
-              <h2>📝 Tasks</h2>
-              <ul>
-                <li>Review reported incident submissions</li>
-                <li>Update alert thresholds</li>
-                <li>Check last 24h safety trends</li>
-              </ul>
-            </div>
+          {/* Table Section */}
+          <section className="table-section">
+            <h2 style={{ marginBottom: "10px" }}>Reported Incidents</h2>
+            <Table
+              columns={columns}
+              dataSource={locationData?.nearbyReports || []}
+              rowKey="_id"
+              pagination={{ pageSize: 5 }}
+              bordered
+            />
           </section>
-
-          
-          <section className="latest-crimes">
-            <h2>📍 Latest Crime Updates</h2>
-            <div className="crime-update">
-              <p>🕵️ Robbery reported at Elm Street</p>
-              <span>3 hours ago</span>
-            </div>
-            <div className="crime-update">
-              <p>🔪 Assault incident near Central Park</p>
-              <span>7 hours ago</span>
-            </div>
-            <div className="crime-update">
-              <p>📦 Package theft near 5th Avenue</p>
-              <span>10 hours ago</span>
-            </div>
-          </section>
-          <section className="emergency-contacts">
-  <h2>📞 Emergency Contacts</h2>
-  <div className="contacts-grid">
-    <div className="contact-card">
-      <h3>🚓 Police</h3>
-      <p>Call for any law enforcement emergency or crime report.</p>
-      <a href="tel:100">📞 100</a>
-    </div>
-    <div className="contact-card">
-      <h3>🚑 Ambulance</h3>
-      <p>For medical emergencies and first aid assistance.</p>
-      <a href="tel:101">📞 101</a>
-    </div>
-    <div className="contact-card">
-      <h3>🔥 Fire Department</h3>
-      <p>To report fire hazards or fire-related emergencies.</p>
-      <a href="tel:102">📞 102</a>
-    </div>
-    <div className="contact-card">
-      <h3>🏥 Nearby Hospital</h3>
-      <p>Sunrise Medical Center</p>
-      <a href="tel:+19876543210">📞 +1 (987) 654-3210</a>
-    </div>
-    <div className="contact-card">
-      <h3>📍 Local Safety Office</h3>
-      <p>For neighborhood safety and community issues.</p>
-      <a href="tel:+11234567890">📞 +1 (123) 456-7890</a>
-    </div>
-  </div>
-
-  <div className="emergency-tips">
-    <h1>⚠️ What To Do in an Emergency</h1>
-    <div className='emergency'>
-    <ul>
-      <li>Stay calm and assess the situation.</li>
-      <li>Call the appropriate emergency service immediately.</li>
-      <li>Provide accurate details like location and type of emergency.</li>
-      <li>Keep emergency numbers saved on your phone.</li>
-    </ul>
-  </div>
-  </div>
-</section>
-
         </main>
       </div>
-      <Footer/>
+
+      <Footer />
     </div>
   );
 };
 
 export default Dashboard;
-
-
-
