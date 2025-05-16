@@ -1,191 +1,189 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Card, Col, Row, Table, Typography, notification } from "antd";
+import { Bar, Pie } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import "../App.css";
 
-import React, { useEffect, useRef } from 'react';
- import '../dashboard.css';
-import { Chart } from 'chart.js/auto';
-// import Logo from '../assets/images/logo.jpeg';
- import User from '../assets/images/user.png'
+ChartJS.register(ArcElement, BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+
+const { Title } = Typography;
 
 const Dashboard = () => {
-  const pieRef = useRef(null);
-  const barRef = useRef(null);
+  const [locationReports, setLocationReports] = useState({});
+  const [reports, setReports] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const pieChart = new Chart(pieRef.current, {
-      type: 'pie',
-      data: {
-        labels: ['Robbery', 'Assault', 'Theft', 'Vandalism'],
-        datasets: [{
-          data: [25, 15, 40, 20],
-          backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#4bc0c0']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'bottom'
-          }
+    const fetchReports = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get("http://localhost:5001/api/auth/getLocation", {
+          headers: { "Content-Type": "application/json" },
+        });
+        if (response.status === 200) {
+          setLocationReports(response.data);
+          setReports(response.data.allReports || []);
+        } else {
+          notification.error({
+            message: "Error",
+            description: "Failed to fetch reports.",
+          });
         }
+      } catch (err) {
+        console.error("Fetch error:", err);
+        notification.error({
+          message: "Error",
+          description: "Something went wrong while fetching reports.",
+        });
+      } finally {
+        setLoading(false);
       }
-    });
-
-    const barChart = new Chart(barRef.current, {
-      type: 'bar',
-      data: {
-        labels: ['January', 'February', 'March', 'April'],
-        datasets: [{
-          label: 'Incidents',
-          data: [30, 45, 28, 60],
-          backgroundColor: '#36a2eb'
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-
-    return () => {
-      pieChart.destroy();
-      barChart.destroy();
     };
+    fetchReports();
   }, []);
 
+  // Calculate metrics
+  const totalReports = reports.length;
+  const severityCounts = reports.reduce(
+    (acc, report) => ({
+      ...acc,
+      [report.severity || "Unknown"]: (acc[report.severity || "Unknown"] || 0) + 1,
+    }),
+    {}
+  );
+
+  const incidentTypeCounts = reports.reduce(
+    (acc, report) => ({
+      ...acc,
+      [report.incidentType || "Unknown"]: (acc[report.incidentType || "Unknown"] || 0) + 1,
+    }),
+    {}
+  );
+
+  const barChartData = {
+    labels: Object.keys(incidentTypeCounts),
+    datasets: [
+      {
+        label: "Reports by Incident Type",
+        data: Object.values(incidentTypeCounts),
+        backgroundColor: ["#0077cc", "#ffcc00", "#ff4d4f", "#52c41a"],
+      },
+    ],
+  };
+
+  const pieChartData = {
+    labels: Object.keys(severityCounts),
+    datasets: [
+      {
+        label: "Reports by Severity",
+        data: Object.values(severityCounts),
+        backgroundColor: ["#52c41a", "#faad14", "#ff4d4f"],
+      },
+    ],
+  };
+
+  const columns = [
+    {
+      title: "Type",
+      dataIndex: "incidentType",
+      key: "incidentType",
+    },
+    {
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
+    },
+    {
+      title: "Severity",
+      dataIndex: "severity",
+      key: "severity",
+    },
+    {
+      title: "Location",
+      dataIndex: "location",
+      key: "location",
+    },
+    {
+      title: "Anonymous",
+      dataIndex: "anonymous",
+      key: "anonymous",
+      render: (val) => (val ? "Yes" : "No"),
+    },
+    {
+      title: "Date",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (val) => new Date(val).toLocaleString(),
+    },
+  ];
+
   return (
-    <div className="background">
-    
+    <div className="dashboard-container">
+      <Title level={2}>📊 Dashboard</Title>
 
-      {/* Dashboard Content */}
-      <div className="dashboard-container">
-        <main className="main-content">
-           <header className="dashboard-header">
-            <div>
-              <h1>Welcome, John Doe</h1>
-              <p>Here’s what’s happening in your neighborhood today.</p>
-            </div>
-            <div className="user-info">
-              <img src={User} alt="User" />
-              <span>John Doe</span>
-            </div>
-          </header> 
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={12} md={8}>
+          <Card title="Total Reports" className="metric-card">
+            <Title level={3}>{locationReports?.totalReportsCount || 0}</Title>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={8}>
+          <Card title="Theft Reports" className="metric-card">
+            <Title level={3}>{locationReports?.allIncidentCounts?.theft || 0}</Title>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={8}>
+          <Card title="Vandalism Reports" className="metric-card">
+            <Title level={3}>{locationReports?.allIncidentCounts?.vandalism || 0}</Title>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={8}>
+          <Card title="Other Reports" className="metric-card">
+            <Title level={3}>{locationReports?.allIncidentCounts?.other || 0}</Title>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={8}>
+          <Card title="Suspicious Reports" className="metric-card">
+            <Title level={3}>{locationReports?.allIncidentCounts?.suspicious_activity || 0}</Title>
+          </Card>
+        </Col>
+      </Row>
 
-          {/* Statistics */}
-          <section className="dashboard-stats">
-            <div className="stat-card">
-              <h3>Total Reports</h3>
-              <p>125</p>
-            </div>
-            <div className="stat-card">
-              <h3>Active Alerts</h3>
-              <p>5</p>
-            </div>
-            <div className="stat-card">
-              <h3>Resolved Cases</h3>
-              <p>89</p>
-            </div>
-            <div className="stat-card">
-              <h3>New Reports Today</h3>
-              <p>7</p>
-            </div>
-          </section>
+      <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
+        <Col xs={24} md={12}>
+          <Card title="Reports by Incident Type" className="chart-card">
+            <Bar data={barChartData} options={{ responsive: true, maintainAspectRatio: false }} />
+          </Card>
+        </Col>
+        <Col xs={24} md={12}>
+          <Card title="Reports by Severity" className="chart-card">
+            <Pie data={pieChartData} options={{ responsive: true, maintainAspectRatio: false }} />
+          </Card>
+        </Col>
+      </Row>
 
-          {/* Charts */}
-          <section className="charts-section">
-            <div className="chart-card">
-              <h2>Crime Type Distribution</h2>
-              <canvas ref={pieRef}></canvas>
-            </div>
-            <div className="chart-card">
-              <h2>Monthly Incident Report</h2>
-              <canvas ref={barRef}></canvas>
-            </div>
-          </section>
-
-          {/* Notifications and Tasks */}
-          <section className="extra-sections">
-            <div className="notifications">
-              <h2>🔔 Notifications</h2>
-              <ul>
-                <li>🚨 Suspicious activity on Main Street <span>2 hours ago</span></li>
-                <li>🚓 Police patrolling near Oak Avenue <span>4 hours ago</span></li>
-              </ul>
-            </div>
-
-            <div className="tasks">
-              <h2>📝 Tasks</h2>
-              <ul>
-                <li>Review reported incident submissions</li>
-                <li>Update alert thresholds</li>
-                <li>Check last 24h safety trends</li>
-              </ul>
-            </div>
-          </section>
-
-          {/* Latest Updates */}
-          <section className="latest-crimes">
-            <h2>📍 Latest Crime Updates</h2>
-            <div className="crime-update">
-              <p>🕵️ Robbery reported at Elm Street</p>
-              <span>3 hours ago</span>
-            </div>
-            <div className="crime-update">
-              <p>🔪 Assault incident near Central Park</p>
-              <span>7 hours ago</span>
-            </div>
-            <div className="crime-update">
-              <p>📦 Package theft near 5th Avenue</p>
-              <span>10 hours ago</span>
-            </div>
-          </section>
-          <section className="emergency-contacts">
-  <h2>📞 Emergency Contacts</h2>
-  <div className="contacts-grid">
-    <div className="contact-card">
-      <h3>🚓 Police</h3>
-      <p>Call for any law enforcement emergency or crime report.</p>
-      <a href="tel:100">📞 100</a>
-    </div>
-    <div className="contact-card">
-      <h3>🚑 Ambulance</h3>
-      <p>For medical emergencies and first aid assistance.</p>
-      <a href="tel:101">📞 101</a>
-    </div>
-    <div className="contact-card">
-      <h3>🔥 Fire Department</h3>
-      <p>To report fire hazards or fire-related emergencies.</p>
-      <a href="tel:102">📞 102</a>
-    </div>
-    <div className="contact-card">
-      <h3>🏥 Nearby Hospital</h3>
-      <p>Sunrise Medical Center</p>
-      <a href="tel:+19876543210">📞 +1 (987) 654-3210</a>
-    </div>
-    <div className="contact-card">
-      <h3>📍 Local Safety Office</h3>
-      <p>For neighborhood safety and community issues.</p>
-      <a href="tel:+11234567890">📞 +1 (123) 456-7890</a>
-    </div>
-  </div>
-
-  <div className="emergency-tips">
-    <h1>⚠️ What To Do in an Emergency</h1>
-    <div className='emergency'>
-    <ul>
-      <li>Stay calm and assess the situation.</li>
-      <li>Call the appropriate emergency service immediately.</li>
-      <li>Provide accurate details like location and type of emergency.</li>
-      <li>Keep emergency numbers saved on your phone.</li>
-    </ul>
-  </div>
-  </div>
-</section>
-
-        </main>
-      </div>
+      <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
+        <Col xs={24}>
+          <Card title="Recent Reports" className="table-card">
+            <Table
+              columns={columns}
+              dataSource={locationReports?.allReports || []}
+              rowKey="_id"
+              loading={loading}
+              pagination={{ pageSize: 5 }}
+            />
+          </Card>
+        </Col>
+      </Row>
     </div>
   );
 };

@@ -15,9 +15,10 @@ ReactDOM.createRoot(root).render(
   <BrowserRouter>
   <Routes>
     
-    <Route path="/" element={<Admin/>}/>
+    <Route path="/" element={<Login/>}/>
     <Route path="/admin" element={<Admin/>}/>
     <Route path="/login" element={<Login/>}/>  
+        <Route path="*" element={<Login/>}/> 
       <Route path="/dashboard" element={<Dashboard/>}/> 
       <Route path="/users" element={<Users/>}/>  
       <Route path="/reports" element={<Reports/>}/> 
