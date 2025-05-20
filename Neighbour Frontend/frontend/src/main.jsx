@@ -1,7 +1,7 @@
 import react from 'react'
 import ReactDOM from "react-dom/client";
 import { BrowserRouter,Routes,Route } from "react-router";
-// import App from './App.jsx'
+
 
 import Home from "./Pages/home";
 import Map from "./Pages/map";
@@ -21,8 +21,7 @@ import Logo from "./assets/images/logo.jpeg";
  import Maps from "./assets/images/maps.png";
 import Upload from "./Pages/uploadFile";
 import Users from "./Pages/Users";
-// import ForgotPassword from './Pages/ForgotPassword';
-// import ResetPassword from './Pages/ResetPassword';
+
 
  import Reports from "./assets/images/reports.png";
  import Security from "./assets/images/security.webp";
@@ -39,7 +38,7 @@ const root = document.getElementById("root");
 ReactDOM.createRoot(root).render(
   <BrowserRouter>
   <Routes>
-    {/* import ForgotPassword from './pages/ForgotPassword'; */}
+    
 
 
 
@@ -61,7 +60,7 @@ ReactDOM.createRoot(root).render(
     <Route path="/facebook" element={<Facebook/>}/>
     <Route path="/community" element={<Community />}/>
     <Route path="/awareness" element={<Awareness/>}/> 
-    {/* <Route path="/reset-password/:token" element={<ResetPassword />} /> */}
+    
     <Route path="/logo" element={<Logo/>}/>
     <Route path="/map1" element={<Map1/>}/>
     <Route path="/maps" element={<Maps/>}/>
@@ -69,7 +68,7 @@ ReactDOM.createRoot(root).render(
     <Route path="/security" element={<Security/>}/>
     <Route path="/twitter" element={<Twitter/>}/>
     <Route path="/user" element={<User/>}/>
-    {/* <Route path="/forgot-password" element={<ForgotPassword />} /> */}
+    
   </Routes>
  </BrowserRouter>
 );

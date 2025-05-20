@@ -2,7 +2,7 @@
 
 
 
-/* Loader styling */
+
 .full-page-loader {
   position: fixed;
   top: 0;
@@ -18,7 +18,7 @@
 
 
 .register-container {
-  /* margin-top: 100px; */
+ 
   padding: 20px;
   animation: slideFadeIn 0.7s ease-in-out;
 }
@@ -50,7 +50,7 @@
   }
 }
 
-/* Responsive form container */
+
 .ant-form {
   background-color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -58,7 +58,7 @@
   animation: fadeIn 0.5s ease-in;
 }
 
-/* Mobile Styles */
+
 @media (max-width: 768px) {
   .register-container {
     margin: 60px 10px 20px;

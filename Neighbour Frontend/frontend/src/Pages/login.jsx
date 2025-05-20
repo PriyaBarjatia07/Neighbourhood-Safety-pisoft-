@@ -15,11 +15,11 @@ const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  // Forgot Password Modal
+  
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [forgotEmail, setForgotEmail] = useState('');
 
-  // OTP & Reset Password Modal
+  
   const [isOTPModalVisible, setIsOTPModalVisible] = useState(false);
   const [otp, setOtp] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -59,11 +59,11 @@ const Login = () => {
     }
   };
 
-  // First Modal
+  
   const showModal = () => setIsModalVisible(true);
   const handleCancel = () => {
     setIsModalVisible(false);
-    // setForgotEmail('');
+    
   };
 
   const handleSendResetLink = async () => {
@@ -74,13 +74,13 @@ const Login = () => {
     try {
       await axiosInstance.post(`${apiUrl}/api/auth/forgotPassword`, { email: forgotEmail });
       setIsModalVisible(false);
-      setIsOTPModalVisible(true); // Open OTP modal
+      setIsOTPModalVisible(true); 
     } catch (error) {
       openNotificationWithIcon("error", "Error", "Failed to send OTP. Try again.");
     }
   };
 
-  // Second Modal
+  
   const handleOTPSubmit = async () => {
     if (!otp || !newPassword || !confirmPassword) {
       return openNotificationWithIcon("warning", "Missing Fields", "Please fill all fields.");
@@ -99,9 +99,7 @@ const Login = () => {
       });
       openNotificationWithIcon("success", "Password Reset", "Password changed successfully.");
       setIsOTPModalVisible(false);
-      // setOtp('');
-      // setNewPassword('');
-      // setConfirmPassword('');
+      
     } catch (error) {
       openNotificationWithIcon("error", "Reset Failed", error.response?.data?.message || "Invalid OTP or expired.");
     }
@@ -158,7 +156,7 @@ const Login = () => {
         <Footer />
       </div>
 
-      {/* First Modal: Enter Email */}
+      
       <Modal
         title="Reset Your Password"
         visible={isModalVisible}
@@ -173,7 +171,7 @@ const Login = () => {
         />
       </Modal>
 
-      {/* Second Modal: Enter OTP & New Password */}
+      
       <Modal
         title="Verify OTP & Reset Password"
         visible={isOTPModalVisible}

@@ -196,7 +196,7 @@ const Report = () => {
             />
             
     
-            {/* <button className= "location" type="button" onClick={handlePickLocation}>📍 Pick Location</button> */}
+            
           </div>
 <button className= "location" type="button" onClick={handlePickLocation}>📍 Pick Location</button>
           {showMap && (

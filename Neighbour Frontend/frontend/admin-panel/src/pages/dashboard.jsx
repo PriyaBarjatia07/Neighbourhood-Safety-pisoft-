@@ -51,7 +51,7 @@ const Dashboard = () => {
     fetchReports();
   }, []);
 
-  // Calculate metrics
+  
   const totalReports = reports.length;
   const severityCounts = reports.reduce(
     (acc, report) => ({
@@ -148,7 +148,7 @@ const Dashboard = () => {
         </Col>
         <Col xs={24} sm={12} md={8}>
           <Card title="Other Reports" className="metric-card">
-            <Title level={3}>{locationReports?.allIncidentCounts?.other || 0}</Title>
+            <Title level={3}>{locationReports?.allIncidentCounts?.others || 0}</Title>
           </Card>
         </Col>
         <Col xs={24} sm={12} md={8}>

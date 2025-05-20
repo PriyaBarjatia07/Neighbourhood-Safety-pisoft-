@@ -124,9 +124,7 @@ const navigate =useNavigate();
           }}
         >
           <div>
-            {/* <h1 className="text-2xl font-semibold text-center mb-4">Create Your Account</h1> */}
-
-            {/* <h1>Create Your an Account</h1> */}
+            
           <Form.Item name="email" label="E-mail" rules={[{ type: "email", required: true, message: "Enter a valid email!" }]}>
             <Input />
           </Form.Item>
@@ -151,7 +149,7 @@ const navigate =useNavigate();
           </Form.Item>
 
           <Form.Item name="residence" label="Residential Address" rules={[{ required: true, message: "Add your residence!",whitespace:true }]}>
-                {/* {/* <Cascader  placeholder="Add your residence" showSearch />    */}
+                
                 <Input/> 
           </Form.Item>  
 

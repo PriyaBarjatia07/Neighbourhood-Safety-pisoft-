@@ -5,8 +5,8 @@ import User from '../assets/images/user.png';
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import axios from 'axios';
-import { Table } from 'antd'; // Ant Design Table
-import 'antd/dist/reset.css'; // AntD styles (adjust if using custom theme)
+import { Table } from 'antd'; 
+import 'antd/dist/reset.css'; 
 
 const Dashboard = () => {
   const [enter, setEnter] = useState('');
@@ -15,15 +15,15 @@ const Dashboard = () => {
   const [coords, setCoords] = useState(null);
 
   const pieRef = useRef(null);
-  const pieChartRef = useRef(null); // to destroy previous chart instance
+  const pieChartRef = useRef(null); 
 
-  // Get username from localStorage
+  
   useEffect(() => {
     const enterValue = localStorage.getItem("Username");
     setEnter(enterValue);
   }, []);
 
-  // Handle location search
+  
   const handleSearchLocation = async () => {
     if (!searchInput.trim()) {
       alert("Please enter a location");
@@ -34,7 +34,7 @@ const Dashboard = () => {
       const geoResponse = await axios.get(`https://api.opencagedata.com/geocode/v1/json`, {
         params: {
           q: searchInput,
-          key: '34e403a256c144d8a5b4a912f55b19ea', // Replace with your actual API key
+          key: '34e403a256c144d8a5b4a912f55b19ea', 
           limit: 1
         }
       });
@@ -51,7 +51,7 @@ const Dashboard = () => {
     }
   };
 
-  // Fetch location data when coords change
+  
   useEffect(() => {
     const fetchLocationData = async (lat, lng) => {
       try {
@@ -80,12 +80,12 @@ const Dashboard = () => {
     }
   }, [coords]);
 
-  // Create/Update Pie Chart when data is ready
+
   useEffect(() => {
     if (!pieRef.current || !locationData || !locationData.incidentCounts) return;
 
     if (pieChartRef.current) {
-      pieChartRef.current.destroy(); // destroy previous chart
+      pieChartRef.current.destroy(); 
     }
 
     pieChartRef.current = new Chart(pieRef.current, {
@@ -119,7 +119,7 @@ const Dashboard = () => {
     };
   }, [locationData]);
 
-  // Columns for Ant Design Table
+  
   const columns = [
     {
       title: 'Type',
@@ -172,7 +172,7 @@ const Dashboard = () => {
             </div>
           </header>
 
-          {/* Location Search Section */}
+          
           <section className="location-search">
             <input
               type="text"
@@ -181,14 +181,12 @@ const Dashboard = () => {
               onChange={(e) => setSearchInput(e.target.value)}
               className="location-input"
             />
-            {/* <button onClick={handleSearchLocation} className="location-button">
-              Search Location
-            </button> */}
+            
           </section>
 <button onClick={handleSearchLocation} className="location-button">
               Search Location
             </button>
-          {/* Stats Section */}
+          
           <section className="dashboard-stats">
             <div className="stat-card">
               <h3 className='head'>Nearby Reports</h3>
@@ -196,7 +194,7 @@ const Dashboard = () => {
             </div>
           </section>
 
-          {/* Charts Section */}
+          
           <section className="charts-section">
             <div className="chart-card">
               <h2>Crime Type Distribution</h2>
@@ -204,7 +202,7 @@ const Dashboard = () => {
             </div>
           </section>
 
-          {/* Table Section */}
+          
           <section className="table-section">
             <h2 style={{ marginBottom: "10px" }}>Reported Incidents</h2>
             <Table

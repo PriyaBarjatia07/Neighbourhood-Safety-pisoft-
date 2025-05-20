@@ -19,10 +19,10 @@
   filter: blur(8px);
   z-index: -1;
 } 
-/* Mapss.css */
+
 
 .background {
-  /* background-color: #f5f7fa; */
+  
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -60,7 +60,7 @@
   margin: 5px 0;
 }
 
-/* Animations */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -83,7 +83,7 @@
   }
 }
 
-/* Responsive Adjustments */
+
 @media (max-width: 768px) {
   .map-container {
     padding: 30px 15px;

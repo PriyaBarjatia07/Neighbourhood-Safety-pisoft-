@@ -14,7 +14,7 @@ import {
   Select,
   DatePicker,
 } from "antd";
-  // import apiUrl from "../../../config";
+  
 
 const { Option } = Select;
 
@@ -85,36 +85,15 @@ const Users = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       message.success("User deleted successfully");
-      fetchUsers(); // Refresh the user list
+      fetchUsers(); 
     } catch (error) {
       console.error("Error deleting user:", error);
       message.error("Failed to delete user");
     }
   };
-  // import { Modal, message } from "antd"; // make sure Modal is imported
+  
 
-// const handleDeleteUser = (userId) => {
-//   Modal.confirm({
-//     title: "Are you sure you want to delete this user?",
-//     content: "This action cannot be undone.",
-//     okText: "Yes, Delete",
-//     cancelText: "Cancel",
-//     okType: "danger",
-//     onOk: async () => {
-//       try {
-//         const token = localStorage.getItem("token");
-//         await axios.delete(`http://localhost:5001/api/auth/deleteUser/${userId}`, {
-//           headers: { Authorization: `Bearer ${token}` },
-//         });
-//         message.success("User deleted successfully");
-//         fetchUsers(); // refresh list after delete
-//       } catch (error) {
-//         console.error("Error deleting user:", error);
-//         message.error("Failed to delete user");
-//       }
-//     },
-//   });
-// };
+
 
 
   const openEditModal = (User) => {
@@ -289,7 +268,7 @@ const Users = () => {
           >
             <Select placeholder="Select role">
               <Option value="user">User</Option>
-              {/* <Option value="doctor">Doctor</Option> */}
+              
               <Option value="admin">Admin</Option>
             </Select>
           </Form.Item>

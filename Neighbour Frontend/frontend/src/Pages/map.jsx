@@ -22,7 +22,7 @@ const MapPage = () => {
   const [selectedMarker, setSelectedMarker] = useState(null);
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: 'AIzaSyAhtSmObAYAyLpbCaOLetqfEHF_-luMN3A', // Replace with your actual API key
+    googleMapsApiKey: 'AIzaSyAhtSmObAYAyLpbCaOLetqfEHF_-luMN3A', 
   });
 
   const fetchReports = async () => {
@@ -89,7 +89,7 @@ const MapPage = () => {
             return null;
           })}
 
-          {/* InfoWindow */}
+          
           {selectedMarker && (
             <InfoWindow
               position={{ lat: selectedMarker.lat, lng: selectedMarker.lng }}

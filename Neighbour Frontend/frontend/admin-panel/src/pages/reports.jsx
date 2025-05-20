@@ -8,7 +8,7 @@ const Reports = () => {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  // const [selectedReport, setSelectedReport] = useState(null);
+  
   const [form] = Form.useForm();
 
   const fetchReports = async () => {
@@ -32,8 +32,7 @@ const Reports = () => {
   }, []);
 
   const openEditModal = (report) => {
-    // setSelectedReport(report);
-    // setIsEditMode(true);
+    
     setIsModalVisible(true);
     form.setFieldsValue(report);
   };
@@ -43,7 +42,7 @@ const Reports = () => {
     { title: "Description", dataIndex: "description", key: "description" },
     { title: "Severity", dataIndex: "severity", key: "severity" },
     { title: "Location", dataIndex: "location", key: "location" },
-    // { title: "Reported By", dataIndex: "reportedBy", key: "reportedBy" },
+    
     { title: "Created At", dataIndex: "createdAt", key: "createdAt", render: (text) => new Date(text).toLocaleString() },
     {
       title: "Actions",
@@ -70,7 +69,7 @@ const Reports = () => {
         onCancel={() => {
           setIsModalVisible(false);
           form.resetFields();
-          // setSelectedReport(null);
+          
         }}
         onOk={() => setIsModalVisible(false)}
         okText="Close"

@@ -6,7 +6,7 @@ import axios from 'axios';
 function UploadFile() {
   const [loading, setLoading] = useState(false);
 
-  // Handle file upload
+  
   const handleFileUpload = async (file) => {
     console.log('Uploading file:', file);
     const formData = new FormData();
@@ -22,12 +22,11 @@ function UploadFile() {
       } else {
         message.error('File upload failed');
       }
-    // } catch (error) {
-    //   message.error('Error uploading file');
+    
     } finally {
       setLoading(false);
     }
-    return false;  // Prevent default behavior of file upload
+    return false;  
   };
 
   return (
@@ -39,7 +38,7 @@ function UploadFile() {
             .then(() => onSuccess())
             .catch((err) => onError(err));
         }}
-        showUploadList={false} // Hide default upload list
+        showUploadList={false} 
       >
         <Button icon={<UploadOutlined />} loading={loading}>
           Upload

@@ -131,7 +131,7 @@ input[type="file"] {
   padding: 10px;
 }
 
-/* Map Modal */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -173,7 +173,7 @@ input[type="file"] {
   background-color: #e53935;
 }
 
-/* Responsive Styles */
+
 @media (max-width: 1200px) {
   .report-container {
     max-width: 80%;

@@ -19,11 +19,7 @@ html, body {
   flex-direction: column;
 }
 
-/* body, html {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-} */
+
 
 .background::before {
   content: "";
@@ -513,7 +509,7 @@ footer {
     margin: 10px 0;
   }
 }
-/* Navbar container */
+
 .navbar {
   display: flex;
   align-items: center;
@@ -529,14 +525,14 @@ footer {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Logo container */
+
 .logo-container {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Logo image */
+
 .logo-container img {
   height: 50px;
   width: 50px;
@@ -544,7 +540,7 @@ footer {
   object-fit: cover;
 }
 
-/* Logo text */
+
 .logo {
   font-size: 20px;
   font-weight: bold;
@@ -552,7 +548,7 @@ footer {
   margin-left: 5px;
 }
 
-/* Desktop nav links */
+
 .nav-links.desktop-nav {
   display: flex;
   gap: 20px;
@@ -577,7 +573,7 @@ footer {
   background-color: rgb(122, 122, 156);
 }
 
-/* Logout button styling */
+
 .logout-button {
   background-color: #e74c3c;
   color: white;
@@ -593,7 +589,7 @@ footer {
   background-color: #c0392b;
 }
 
-/* Hamburger menu button */
+
 .hamburger-icon {
   display: none;
   color: white;
@@ -603,7 +599,7 @@ footer {
   font-size: 22px;
 }
 
-/* Responsive behavior */
+
 @media (max-width: 768px) {
   .nav-links.desktop-nav {
     display: none;
@@ -621,7 +617,7 @@ footer {
   color: white;
 }
 
-/* Hide nav-links by default on mobile */
+
 @media (max-width: 768px) {
   .hamburger {
     display: block;

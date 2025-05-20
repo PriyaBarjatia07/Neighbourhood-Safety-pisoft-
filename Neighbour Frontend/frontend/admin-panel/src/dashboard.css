@@ -1,5 +1,5 @@
 @import "tailwindcss";
-/* General Reset */
+
 * {
   margin: 0;
   padding: 0;
@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-  /* background-color: rgba(255, 255, 255, 0.8); Optional: helps visibility */
+  
   padding: 100px;
   border-radius: 12px;
 }
@@ -27,15 +27,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.95); /* Add this */
+  background-color: rgba(255, 255, 255, 0.95); 
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Optional */
-  color: #2c3e50; /* Ensure text is visible */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
+  color: #2c3e50; 
 }
 .dashboard-header h1,
 .dashboard-header p {
-  color: #2c3e50; /* Dark text to contrast light background */
+  color: #2c3e50; 
 }
 
 .user-info {
