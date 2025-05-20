@@ -3,7 +3,7 @@ const userModel = require("../../models/user.model");
 
 const getUsers = async (req, res, next) => {
     try {
-        const users = await userModel.find(); // Await the promise
+        const users = await userModel.find(); 
         res.json(users);
         
 

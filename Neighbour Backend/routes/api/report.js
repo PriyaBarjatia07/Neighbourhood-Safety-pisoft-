@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const upload = require("../middleware/upload"); // path to your upload.js
+const upload = require("../middleware/upload"); 
 const path = require("path");
 
 router.post("/submit", upload.array("media"), async (req, res) => {
@@ -11,7 +11,7 @@ router.post("/submit", upload.array("media"), async (req, res) => {
     console.log("Received data:", { incidentType, description, severity, location, anonymous });
     console.log("Uploaded files:", mediaFiles);
 
-    // You can store file paths in DB, like mediaFiles.map(f => f.path)
+    
 
     res.json({ success: true, message: "Report submitted successfully." });
   } catch (error) {

@@ -3,7 +3,7 @@ const reportModel = require("../../models/report.model");
 const getIncidents = async (req, res, next) => {
     try {
         console.log("Entered incident endppoint...")
-        const incidents = await reportModel.find(); // Await the promise
+        const incidents = await reportModel.find(); 
         res.json(incidents);
         
 

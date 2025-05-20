@@ -7,12 +7,12 @@ const login = async (req, res, next) => {
   try {
     console.log("entered login endpoint.......");
 
-    // Validate user input
+    
     const loginResponse = await loginValidation.validateAsync(req.body);
     console.log(loginResponse);
     const { email, password } = loginResponse;
 
-    // Check if user exists
+    
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
       return res.status(400).json({
@@ -25,7 +25,7 @@ const login = async (req, res, next) => {
     console.log("existingPassword", existingUser.password);
     console.log("existingUser", existingUser.Username);
 
-    // Check if password is correct
+    
     if (password !== existingUser.password) {
       return res.status(401).json({
         success: false,
@@ -33,7 +33,7 @@ const login = async (req, res, next) => {
       });
     }
 
-    // Generate JWT token
+    
     const token = jwt.sign(
       { userId: existingUser._id, email: existingUser.email },
       "your_secret_key",
@@ -45,7 +45,7 @@ const login = async (req, res, next) => {
       message: "Login successful 🎉",
       Username: existingUser.Username,
       email: existingUser.email,
-      token, // Sending the token to the frontend
+      token, 
       redirectTo: "/dashboard",
     });
   } catch (error) {
@@ -53,14 +53,6 @@ const login = async (req, res, next) => {
   }
 };
 
-// // Get all users
-// exports.getUsers = async (req, res) => {
-//   try {
-//     const users = await User.find();
-//     res.status(200).json({ success: true, data: users });
-//   } catch (error) {
-//     res.status(500).json({ success: false, message: "Error fetching users." });
-//   }
-// };
+
 
 module.exports = login;

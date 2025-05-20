@@ -6,13 +6,13 @@ const registrationValidation = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().min(3).max(50).required(),
     confirmPassword: Joi.string().required(),
-    // bloodGroup: Joi.string().valid("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-").required(),
+    
          residence: Joi.string().required(),
-    phone: Joi.string().pattern(/^[0-9]{10}$/).required(),    // Ensures 10-digit phone number
+    phone: Joi.string().pattern(/^[0-9]{10}$/).required(),   
     gender: Joi.string()
         .valid("Male", "Female", "Other")
-        .insensitive()    // Allows "male", "female", "other" (case-insensitive)
-        .trim()       // Removes leading/trailing spaces
+        .insensitive()    
+        .trim()       
         .required(),
      role:Joi.string().valid("user","admin").required(),
 });
@@ -37,14 +37,14 @@ const loginValidation = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().min(3).max(50).required(),
     confirmPassword: Joi.string().required(),
-    // bloodGroup: Joi.string().valid("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-").required(), // i have comment this bcz u havnt paasing blood group from fronted
+ 
     phone: Joi.string().pattern(/^[0-9]{10}$/).required(),
     residence: Joi.string().required(),
     role:Joi.string().valid("user","doctor","admin"),
     gender: Joi.string()
         .valid("Male", "Female", "Other")
-        .insensitive() // Allows "male", "female", "other" (case-insensitive)
-        .trim() // Removes leading/trailing spaces
+        .insensitive() 
+        .trim() 
         .required()
 }).unknown(true);
 

@@ -2,10 +2,10 @@ const User = require("../../models/user.model");
 
 const updateUser = async (req, res) => {
   try {
-    const userId = req.params.id; // :id from URL
+    const userId = req.params.id; 
     const updateData = req.body;
 
-    // Optional: Don't allow password change here
+    
     delete updateData.password;
     delete updateData.confirmPassword;
 

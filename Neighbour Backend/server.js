@@ -8,13 +8,13 @@ const cors = require("cors")
 const routes = require("./routes")
 
 const path = require('path');
-// const authApi = require("./routes/api/index");
+
 backend.use(cors({
     origin: "*",
     methods : ["GET", "PUT", "PATCH", "POST", "DELETE"],
-    // credentials:true
+    
 }));
-// backend.use("/api", authApi);
+
 
 backend.use(express.json({ limit: '100mb' }));
 backend.use(express.urlencoded({ extended: true, limit: '100mb' }));
@@ -23,10 +23,7 @@ backend.use(express.urlencoded({ extended: true, limit: '100mb' }));
 
 
 backend.use(routes);
-// backend.use("/api/contact", contactRoute);
-// backend.use("/api/doctor", doctorAccessRoute);
-// backend.use("/api",uploadRoutes);
-// backend.use('/uploads', express.static('uploads'));
+
 
 
 

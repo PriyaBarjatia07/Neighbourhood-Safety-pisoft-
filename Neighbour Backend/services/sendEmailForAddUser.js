@@ -11,7 +11,7 @@ const sendEmailForAddUser = async (email, password) => {
   });
 
   const mailOptions = {
-    from: `"Neighbourhood Admin Team" <${process.env.GMAIL_ID}>`, // More professional from field
+    from: `"Neighbourhood Admin Team" <${process.env.GMAIL_ID}>`, 
     to: email,
     subject: "User Account Successfully Created",
     html: `
@@ -32,7 +32,7 @@ const sendEmailForAddUser = async (email, password) => {
     await transporter.sendMail(mailOptions);
     console.log("Add User email sent successfully");
   } catch (error) {
-    console.error("Error sending Add User email:", error); // Corrected log
+    console.error("Error sending Add User email:", error); 
     throw new Error("Failed to send Add User email");
   }
 };

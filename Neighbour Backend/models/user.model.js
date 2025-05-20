@@ -44,10 +44,7 @@ const UserSchema = new Schema({
         required: true
     },
    
-//      resetToken: String,
-// resetTokenExpire: Date,
-       
-                 role:{
+     role:{
                      type:String,
                      enum:["user","admin"],
                      default:"user"

@@ -13,22 +13,20 @@ const verifyPassword = async (req, res) => {
   }
 
   try {
-    // 1. Check OTP
+    
     const existingOtp = await OtpModel.findOne({ email });
 
     if (!existingOtp || existingOtp.otp !== otp) {
       return res.status(400).json({ message: "Invalid or expired OTP." });
     }
 
-    // Optional: Check if OTP is older than 10 minutes
+    
     const isExpired = Date.now() - new Date(existingOtp.createdAt).getTime() > 10 * 60 * 1000;
     if (isExpired) {
       return res.status(400).json({ message: "OTP expired. Please request a new one." });
     }
 
-    // 2. Hash the new password
-
-    // 3. Update password in UserModel
+    
     const user = await UserModel.findOneAndUpdate(
       { email },
       { password: confirmPassword },
@@ -39,7 +37,7 @@ const verifyPassword = async (req, res) => {
       return res.status(404).json({ message: "User not found." });
     }
 
-    // 4. Delete OTP record
+    
     await OtpModel.deleteOne({ email });
 
     res.status(200).json({ message: "Password reset successful." });

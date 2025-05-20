@@ -1,9 +1,9 @@
 const Report = require("../../models/report.model");
 
-// Haversine formula to calculate distance in km
+
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   const toRad = (value) => (value * Math.PI) / 180;
-  const R = 6371; // Radius of Earth in km
+  const R = 6371; 
   const dLat = toRad(lat2 - lat1);
   const dLon = toRad(lon2 - lon1);
   const a =
@@ -23,17 +23,17 @@ const getNearbyReports = async (req, res, next) => {
     const userLat = parseFloat(lat);
     const userLng = parseFloat(lng);
 
-    // Fetch all reports from DB
+    
     const allReports = await Report.find();
 
-    // Count of all incident types (across full DB)
+    
     const allIncidentCounts = allReports.reduce((acc, report) => {
       const type = report.incidentType.toLowerCase().replace(/\s+/g, "_");
       acc[type] = (acc[type] || 0) + 1;
       return acc;
     }, {});
 
-    // Filter nearby reports (within 5km radius)
+    
     const nearbyReports = allReports.filter((report) => {
       if (!report.location) return false;
 
@@ -46,7 +46,7 @@ const getNearbyReports = async (req, res, next) => {
       return distance <= 5;
     });
 
-    // Count of incident types in nearby reports
+    
     const incidentCounts = nearbyReports.reduce((acc, report) => {
       const type = report.incidentType.toLowerCase().replace(/\s+/g, "_");
       acc[type] = (acc[type] || 0) + 1;
@@ -58,8 +58,8 @@ const getNearbyReports = async (req, res, next) => {
       nearbyReports,
       allReports,
       nearbyReportsCount: nearbyReports.length,
-      incidentCounts,        // incidents near user
-      allIncidentCounts,     // all incidents in        // full list of all reports
+      incidentCounts,        
+      allIncidentCounts,    
     });
 
   } catch (error) {

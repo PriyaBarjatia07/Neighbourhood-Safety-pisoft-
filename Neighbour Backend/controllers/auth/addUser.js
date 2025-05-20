@@ -1,4 +1,4 @@
-const User = require("../../models/user.model");
+const User = require ("../../models/user.model");
 const { addUservalidation } = require("../../services/validation_schema");
 const sendEmailForAddUser = require("../../services/sendEmailForAddUser");
 
@@ -19,12 +19,12 @@ const addUser = async (req, res, next) => {
       });
     }
 
-    // Store password directly (not recommended for production)
+    
     const newUser = new User({
       Username,
       dob,
       email,
-      password, // Plain text (bad practice!)
+      password, 
       role,
       gender,
       phone,

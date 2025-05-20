@@ -13,7 +13,7 @@ const forgotPassword = async (req, res) => {
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
   try {
-    // Send email
+    
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -31,7 +31,7 @@ const forgotPassword = async (req, res) => {
 
     await transporter.sendMail(mailOptions);
 
-    // Store OTP in DB
+    
     await OtpModel.findOneAndUpdate(
       { email },
       { otp, createdAt: Date.now() },
