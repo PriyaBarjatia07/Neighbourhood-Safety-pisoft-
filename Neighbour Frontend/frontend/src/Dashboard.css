@@ -20,8 +20,190 @@
   filter: blur(8px);
   z-index: -1;
 } 
+/* General resets */
+body, html, div, h1, h2, h3, p, input, button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 .background {
+  /* background-color: #f5f7fa; */
+  min-height: 100vh;
+}
+
+.dashboard-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Header */
+.dashboard-header {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dashboard-header h1 {
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.para {
+  color: #666;
+  font-size: 1rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Location Search */
+.location-search {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.location-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.location-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  max-width: 180px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.location-button:hover {
+  background-color: #0056b3;
+}
+
+/* Stats Section */
+.dashboard-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.stat-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  flex: 1;
+  min-width: 240px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.stat-card h3 {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.stat-card p {
+  font-size: 2rem;
+  color: #007bff;
+  margin-top: 10px;
+}
+
+/* Charts Section */
+.charts-section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.chart-card h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+
+/* Table Section */
+.table-section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+}
+
+.table-section h2 {
+  color: #333;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .user-info {
+    margin-top: 15px;
+  }
+
+  .location-input {
+    max-width: 100%;
+  }
+
+  .location-button {
+    width: 100%;
+  }
+
+  .dashboard-stats {
+    flex-direction: column;
+  }
+
+  .stat-card {
+    width: 100%;
+  }
+
+  .charts-section, .table-section {
+    padding: 15px;
+  }
+}
+
+/* .background {
  
   min-height: 100vh;
   color: #ffffff;
@@ -208,4 +390,4 @@ h1{
     width: 90%;
   }
 }
-
+ */

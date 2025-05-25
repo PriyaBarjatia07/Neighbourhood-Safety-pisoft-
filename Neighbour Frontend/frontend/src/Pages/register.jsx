@@ -15,6 +15,8 @@ import {
 import axios from "axios"; 
 import { useGoogleLogin } from "@react-oauth/google";
 import "../register.css";
+import "../navbar.css";
+import "../footer.css";
 import  Navbar from "../components/navbar";
 import  Footer from "../components/footer";
 import { useNavigate } from "react-router";

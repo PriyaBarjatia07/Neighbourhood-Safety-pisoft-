@@ -8,6 +8,8 @@ import Footer from "../components/footer";
 import axiosInstance from "../../axiosInstance";
 import LoginIllustration from '../assets/images/login.jpg';
 import '../App.css';
+import "../navbar.css";
+import "../footer.css";
 import { apiUrl } from "../../config";
 
 const Login = () => {

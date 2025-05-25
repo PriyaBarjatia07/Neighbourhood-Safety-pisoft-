@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../Dashboard.css';
+import "../navbar.css";
+import "../footer.css";
 import { Chart } from 'chart.js/auto';
 import User from '../assets/images/user.png';
 import Navbar from "../components/navbar";

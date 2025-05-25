@@ -5,6 +5,8 @@ import { message } from 'antd';
 import  Navbar from "../components/navbar";
 import  Footer from "../components/footer";
 import "../Mapss.css";
+import "../navbar.css";
+import "../footer.css";
 
 const containerStyle = {
   width: '100%',

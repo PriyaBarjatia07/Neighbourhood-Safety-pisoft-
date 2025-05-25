@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import  Navbar from "../components/navbar";
 import  Footer from "../components/footer";
 import "../Reportss.css";
+import "../navbar.css";
+import "../footer.css";
 
 const Report = () => {
   const [formData, setFormData] = useState({
